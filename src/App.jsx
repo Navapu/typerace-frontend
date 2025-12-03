@@ -1,6 +1,6 @@
 import './App.css'
 import { Routes, Route, NavLink } from "react-router";
-import { Login } from './pages/Login.tsx';
+import { Login } from './pages/Login.jsx';
 function App() {
   return (
     <div>
