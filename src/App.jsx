@@ -1,6 +1,7 @@
 import './App.css'
 import { Routes, Route, NavLink } from "react-router";
 import { Login } from './pages/Login.jsx';
+import { Header } from './components/Header.jsx';
 function App() {
   return (
     <div>
@@ -8,7 +9,7 @@ function App() {
         <Route path='/auth/Login' element={<Login />}/>
       </Routes>
 
-      <NavLink to= "/auth/login">Login</NavLink>
+      <Header />
     </div>
   )
 }

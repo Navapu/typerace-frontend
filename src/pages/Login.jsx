@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z, { set } from "zod";
+import z from "zod";
 import { AuthContext } from "../context/AuthContext.jsx";
 
 const loginSchema = z.object({
@@ -10,7 +10,8 @@ const loginSchema = z.object({
 });
 
 export const Login = () => {
-  const { login, error } = useContext(AuthContext);
+    const [error, setError] = useState(null);
+  const { login } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -23,7 +24,7 @@ export const Login = () => {
     try {
       await login(values);
     } catch (err) {
-      set(err.message);
+      setError(err);
     }
   };
 
@@ -42,9 +43,10 @@ export const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Email */}
           <div>
-            <label className="block text-gray-100 mb-2">Email</label>
+            <label className="block text-gray-100 mb-2" htmlFor="email">Email</label>
             <input
               type="email"
+              id="email"
               placeholder="your@email.com"
               {...register("email")}
               className={`w-full px-4 py-3 rounded-lg bg-[#1E2A38] text-gray-100 border ${
@@ -58,9 +60,10 @@ export const Login = () => {
 
           {/* Password */}
           <div>
-            <label className="block text-gray-100 mb-2">Password</label>
+            <label className="block text-gray-100 mb-2" htmlFor="password">Password</label>
             <input
               type="password"
+              id="password"
               placeholder="••••••••"
               {...register("password")}
               className={`w-full px-4 py-3 rounded-lg bg-[#1E2A38] text-gray-100 border ${
