@@ -87,7 +87,7 @@ const AuthContextProvider = ({ children }) => {
                 return;
             }
 
-            const response = await apiClient.apply('/auth/refresh', {
+            const response = await apiClient('/auth/refresh', {
                 method: 'POST',
                 body: JSON.stringify(refreshToken_token),
             })
