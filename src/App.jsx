@@ -4,6 +4,7 @@ import { Login } from './pages/Login.jsx';
 import { LoginGoogle } from './pages/LoginGoogle.jsx';
 import { Header } from './components/Header.jsx';
 import PublicRoute from './components/PublicRoute.jsx';
+import { Register } from './pages/Register.jsx';
 function App() {
   return (
     <div>
@@ -18,6 +19,12 @@ function App() {
         <Route path='/auth/login-success' element={
           <PublicRoute>
             <LoginGoogle />
+          </PublicRoute>
+        }/>
+
+        <Route path='/auth/register' element={
+          <PublicRoute>
+            <Register />
           </PublicRoute>
         }/>
       </Routes>

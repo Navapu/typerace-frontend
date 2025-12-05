@@ -6,16 +6,16 @@ import { AuthContext } from "../context/AuthContext.jsx";
 import { useLocation, useNavigate } from "react-router";
 
 const loginSchema = z.object({
-  email: z.email("Email no válido"),
+  email: z.email("Invalid email"),
   password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
 });
 
 export const Login = () => {
-    const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const { login, loginGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from|| "/";
   const {
     register,
     handleSubmit,
@@ -83,7 +83,7 @@ export const Login = () => {
 
           {/* Submit */}
 
-          <button onClick={loginGoogle} type="button" className="mt-2 bg-[#ffffff] text-[#444444] border border-[#cccccc] rounded-lg px-4 py-[14px] font-semibold cursor-pointer text-[15px] transition duration-200 flex items-center justify-center gap-[10px] w-full">
+          <button onClick={loginGoogle} type="button" className="mt-2 bg-white text-gray-700 border border-gray-300 rounded-lg px-4 py-3.5 font-semibold cursor-pointer text-sm transition duration-200 flex items-center justify-center gap-2.5 w-full">
             <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" className="w-5 h-5"/> Continue with Google
           </button>
 
@@ -100,6 +100,16 @@ export const Login = () => {
               {error instanceof Error ? error.message : "Error desconocido"}
             </p>
           )}
+          {/* No tienes cuenta */}
+          <p className="text-center text-gray-300 text-sm mt-4">
+            You don't have an account?{" "}
+            <button
+              type="button"
+              onClick={() => navigate("/auth/register", {state: from})}
+              className="text-orange-400 hover:text-orange-300 font-semibold">
+              Register
+            </button>
+          </p>
         </form>
       </div>
     </div>
