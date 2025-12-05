@@ -43,7 +43,6 @@ const AuthContextProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(responseData));
 
             setUser(responseData); 
-            navigate('/');
         }catch(error){
             console.error("Login error:", error);
             throw error;

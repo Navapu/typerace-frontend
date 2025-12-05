@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { AuthContext } from "../context/AuthContext.jsx";
+import { useLocation, useNavigate } from "react-router";
 
 const loginSchema = z.object({
   email: z.email("Email no válido"),
@@ -12,6 +13,9 @@ const loginSchema = z.object({
 export const Login = () => {
     const [error, setError] = useState(null);
   const { login, loginGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -23,6 +27,8 @@ export const Login = () => {
   const onSubmit = async (values) => {
     try {
       await login(values);
+      setError(null);
+      navigate(from, { replace: true });
     } catch (err) {
       setError(err);
     }
