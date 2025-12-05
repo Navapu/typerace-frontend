@@ -86,6 +86,7 @@ const AuthContextProvider = ({ children }) => {
             if(!response.ok) throw new Error(res.msg || 'Logout failed');
             
             clearTokens();
+            setUser(null);
             navigate('/auth/login');
 
         }catch(error){
