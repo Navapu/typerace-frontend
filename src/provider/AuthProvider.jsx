@@ -39,7 +39,7 @@ const AuthContextProvider = ({ children }) => {
             setTokens(responseData.token, JSON.stringify(refreshToken));
             delete responseData.token;
             delete responseData.refreshToken;
-            delete refreshToken.refreshToken_id;
+            delete responseData.refreshToken_id;
             localStorage.setItem('user', JSON.stringify(responseData));
 
             setUser(responseData); 
@@ -49,6 +49,27 @@ const AuthContextProvider = ({ children }) => {
             throw error;
         }
     }
+
+    const loginGoogle = () => {
+        window.open("http://localhost:3007/auth/google", "_self");
+    };
+
+    const getUserInformation = async() => {
+        try{
+            const response = await apiClient('/auth/me', {
+                method: 'GET'
+            });
+
+            const res = await response.json();
+            if (!response.ok) throw new Error(res.msg || 'getUserInformation failed');
+
+            localStorage.setItem('user', JSON.stringify(res.data));
+            setUser(res.data);
+        }catch(error){
+            console.error("getUserInformation error", error);
+            throw error;
+        }
+    };
 
     const logout = async() => {
         try{
@@ -111,7 +132,7 @@ const AuthContextProvider = ({ children }) => {
     }
     
     return (
-        <AuthContext.Provider value={{ user, login, isLoggedIn, logout, checkToken, isLoading}}>
+        <AuthContext.Provider value={{ user, login, isLoggedIn, logout, checkToken, isLoading, loginGoogle, getUserInformation}}>
             {children}
         </AuthContext.Provider>
     );

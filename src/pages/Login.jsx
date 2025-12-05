@@ -11,7 +11,7 @@ const loginSchema = z.object({
 
 export const Login = () => {
     const [error, setError] = useState(null);
-  const { login } = useContext(AuthContext);
+  const { login, loginGoogle } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -76,9 +76,14 @@ export const Login = () => {
           </div>
 
           {/* Submit */}
+
+          <button onClick={loginGoogle} type="button" className="mt-2 bg-[#ffffff] text-[#444444] border border-[#cccccc] rounded-lg px-4 py-[14px] font-semibold cursor-pointer text-[15px] transition duration-200 flex items-center justify-center gap-[10px] w-full">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" className="w-5 h-5"/> Continue with Google
+          </button>
+
           <button
             type="submit"
-            className="w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-semibold transition-colors duration-200 disabled:opacity-50"
+            className="w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-semibold transition-colors duration-200 disabled:opacity-50 cursor-pointer"
           >
             Login
           </button>
