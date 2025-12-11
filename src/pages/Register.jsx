@@ -41,8 +41,8 @@ export const Register = () => {
     }
   }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#1E2A38] px-4">
-      <div className="max-w-md w-full bg-[#334155] rounded-xl shadow-lg p-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#0F172A] px-4">
+      <div className="max-w-md w-full bg-[#1E293B] rounded-xl shadow-lg p-8">
         <div className="flex items-center justify-center text-center mb-6">
           <h1 className="text-3xl font-bold text-[#F8FAFC] text-center">
             TypeRace
@@ -65,9 +65,9 @@ export const Register = () => {
               id="username"
               placeholder="your_username"
               {...register("username")}
-              className={`w-full px-4 py-3 rounded-lg bg-[#1E2A38] text-gray-100 border ${
+              className={`w-full px-4 py-3 rounded-lg bg-[#0F172A] text-gray-100 border ${
                 errors.username ? "border-orange-500" : "border-gray-700"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm shadow-black/20`}
             />
             {errors.username && (
               <p className="text-orange-500 mt-1 text-sm">
@@ -86,9 +86,9 @@ export const Register = () => {
               id="email"
               placeholder="your@email.com"
               {...register("email")}
-              className={`w-full px-4 py-3 rounded-lg bg-[#1E2A38] text-gray-100 border ${
+              className={`w-full px-4 py-3 rounded-lg bg-[#0F172A] text-gray-100 border ${
                 errors.email ? "border-orange-500" : "border-gray-700"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm shadow-black/20`}
             />
             {errors.email && (
               <p className="text-orange-500 mt-1 text-sm">
@@ -107,9 +107,9 @@ export const Register = () => {
               id="password"
               placeholder="••••••••"
               {...register("password")}
-              className={`w-full px-4 py-3 rounded-lg bg-[#1E2A38] text-gray-100 border ${
+              className={`w-full px-4 py-3 rounded-lg bg-[#0F172A] text-gray-100 border ${
                 errors.password ? "border-orange-500" : "border-gray-700"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm shadow-black/20`}
             />
             {errors.password && (
               <p className="text-orange-500 mt-1 text-sm">
@@ -135,7 +135,7 @@ export const Register = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-semibold transition-colors duration-200 disabled:opacity-50 cursor-pointer"
+            className="w-full py-3 rounded-lg bg-[#3B82F6] hover:bg-[#60A5FA] text-white font-semibold transition-colors duration-200 disabled:opacity-50 cursor-pointer"
           >
             Register
           </button>

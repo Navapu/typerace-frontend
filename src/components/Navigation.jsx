@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
+import { FaUserCircle } from "react-icons/fa";
 
 export const Navigation = () => {
     const {isLoggedIn, user, logout} = useContext(AuthContext);
@@ -8,8 +9,14 @@ export const Navigation = () => {
     return(
         <nav>
             <ul>
-                <li className="bg-orange-500 text-white rounded pt-1 pb-1 pr-3 pl-3 transition-colors duration-200 hover:bg-white hover:text-orange-500">
-                    {isLoggedIn ? <NavLink to="/" onClick={logout}> {user.username} </NavLink> : <NavLink to='/auth/login'>Login</NavLink>}
+                <li className="bg-[#3B82F6]  text-white rounded-3xl pt-2 pb-2 pr-4 pl-4 transition-colors duration-200 hover:bg-white hover:text-[#3B82F6]">
+                    {isLoggedIn ? 
+                    
+                    <NavLink to="/" onClick={logout} className="flex items-center gap-3"> 
+                        <FaUserCircle size={20} />{user.username} 
+                    </NavLink> : 
+                    
+                    <NavLink to='/auth/login' className="flex items-center gap-3"> <FaUserCircle size={20}/> Login</NavLink>}
                 </li>
             </ul>
         </nav>

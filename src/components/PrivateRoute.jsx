@@ -7,7 +7,7 @@ const PrivateRoute = ({children}) => {
     const location = useLocation();
 
     if (isLoading) return <div>Cargando...</div>;
-    return isLoggedIn ? children : <Navigate to="/login" state={{ from: location }} replace/>
+    return isLoggedIn ? children : <Navigate to="/auth/login" state={{ from: location }} replace/>
 }
 
 export default PrivateRoute

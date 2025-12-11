@@ -43,6 +43,36 @@ h1 {
   animation: bounce 1s ease-in-out infinite; /* Duración 1s, repite indefinidamente */
 }
 
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.4;
+    transform: translateY(20vh); /* NO suben al top */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10vh);
+  }
+}
+
+.animate-float {
+  animation-name: floatUp;
+  animation-timing-function: linear;
+}
+
+
+.floating-mask {
+  mask-image: linear-gradient(to bottom, transparent 0%, white 30%, white 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, white 30%, white 70%, transparent 100%);
+}
+
+
 /* button {
   border-radius: 8px;
   border: 1px solid transparent;

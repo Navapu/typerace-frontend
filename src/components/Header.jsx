@@ -2,7 +2,7 @@ import { Navigation } from "./Navigation.jsx";
 
 export const Header = () => {
     return (
-        <header className="bg-[#334155] shadow-md">
+        <header className="bg-[#1E293B] shadow-md">
             <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <img

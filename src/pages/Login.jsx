@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { AuthContext } from "../context/AuthContext.jsx";
 import { useLocation, useNavigate } from "react-router";
+import { FloatingWords } from '../components/FloatingWords.jsx';
 
 const loginSchema = z.object({
   email: z.email("Invalid email"),
@@ -35,8 +36,9 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#1E2A38] px-4">
-      <div className="max-w-md w-full bg-[#334155] rounded-xl shadow-lg p-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#0F172A] px-4">
+      <FloatingWords />
+      <div className="max-w-md w-full bg-[#1E293B] rounded-xl shadow-lg p-8">
         <div className="flex items-center justify-center text-center mb-6">
           <h1 className="text-3xl font-bold text-[#F8FAFC] text-center">TypeRace</h1>
           <img
@@ -55,9 +57,9 @@ export const Login = () => {
               id="email"
               placeholder="your@email.com"
               {...register("email")}
-              className={`w-full px-4 py-3 rounded-lg bg-[#1E2A38] text-gray-100 border ${
+              className={`w-full px-4 py-3 rounded-lg bg-[#0F172A] text-gray-100 border ${
                 errors.email ? "border-orange-500" : "border-gray-700"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm shadow-black/20`}
             />
             {errors.email && (
               <p className="text-orange-500 mt-1 text-sm">{errors.email.message}</p>
@@ -72,9 +74,9 @@ export const Login = () => {
               id="password"
               placeholder="••••••••"
               {...register("password")}
-              className={`w-full px-4 py-3 rounded-lg bg-[#1E2A38] text-gray-100 border ${
+              className={`w-full px-4 py-3 rounded-lg bg-[#0F172A] text-gray-100 border ${
                 errors.password ? "border-orange-500" : "border-gray-700"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm shadow-black/20`}
             />
             {errors.password && (
               <p className="text-orange-500 mt-1 text-sm">{errors.password.message}</p>
@@ -89,7 +91,7 @@ export const Login = () => {
 
           <button
             type="submit"
-            className="w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-semibold transition-colors duration-200 disabled:opacity-50 cursor-pointer"
+            className="w-full py-3 rounded-lg bg-[#3B82F6] hover:bg-[#60A5FA] text-white font-semibold transition-colors duration-200 disabled:opacity-50 cursor-pointer"
           >
             Login
           </button>
@@ -106,7 +108,7 @@ export const Login = () => {
             <button
               type="button"
               onClick={() => navigate("/auth/register", {state: from})}
-              className="text-orange-400 hover:text-orange-300 font-semibold">
+              className="text-[#3B82F6] hover:text-[#60A5FA] font-semibold">
               Register
             </button>
           </p>

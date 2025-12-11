@@ -4,7 +4,9 @@ import { Login } from './pages/Login.jsx';
 import { LoginGoogle } from './pages/LoginGoogle.jsx';
 import { Header } from './components/Header.jsx';
 import PublicRoute from './components/PublicRoute.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx'
 import { Register } from './pages/Register.jsx';
+import { Dashboard } from './pages/Dashboard.jsx';
 function App() {
   return (
     <div>
@@ -26,6 +28,12 @@ function App() {
           <PublicRoute>
             <Register />
           </PublicRoute>
+        }/>
+
+        <Route path='/dashboard' element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
         }/>
       </Routes>
     </div>
