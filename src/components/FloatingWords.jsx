@@ -27,8 +27,8 @@ export const FloatingWords = () => {
         color,
         left: Math.random() * 90 + 5,
         duration: Math.random() * 10 + 10,
-        size: Math.random() * 0.4 + 0.9,
-        delay: Math.random() * 2
+        size: Math.random() * 0.4 + 2,
+        delay: Math.random() * 0
       };
 
       setItems(prev => [...prev, newItem]);
@@ -53,7 +53,7 @@ export const FloatingWords = () => {
             animationDuration: `${item.duration}s`,
             animationDelay: `${item.delay}s`,
             fontSize: `${item.size}rem`,
-            color: item.color + "90"
+            color: item.color + "90" // transparencia
           }}
         >
           {item.word}

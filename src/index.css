@@ -53,7 +53,7 @@ h1 {
   }
   70% {
     opacity: 0.4;
-    transform: translateY(20vh); /* NO suben al top */
+    transform: translateY(20vh);
   }
   100% {
     opacity: 0;

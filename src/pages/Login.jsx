@@ -36,9 +36,9 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0F172A] px-4">
-      <FloatingWords />
-      <div className="max-w-md w-full bg-[#1E293B] rounded-xl shadow-lg p-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#0F172A] px-4 relative overflow-hidden">
+        <FloatingWords />
+      <div className="max-w-md w-full bg-[#1E293B] rounded-xl shadow-lg p-8 relative z-50">
         <div className="flex items-center justify-center text-center mb-6">
           <h1 className="text-3xl font-bold text-[#F8FAFC] text-center">TypeRace</h1>
           <img
