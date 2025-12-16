@@ -13,9 +13,10 @@ export const Navigation = () => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setIsMenuOpen(false);
         }};
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
   

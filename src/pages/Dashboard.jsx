@@ -1,7 +1,8 @@
+import { WelcomeCard } from "../components/WelcomeCard.jsx"
 export const Dashboard = () => {
     return(
         <div>
-            <h1>Dashboard</h1>
+            <WelcomeCard />
         </div>
     )
 }
