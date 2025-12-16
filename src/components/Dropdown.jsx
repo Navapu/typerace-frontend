@@ -1,24 +1,33 @@
 import { NavLink } from "react-router";
-import { IoLogOut } from "react-icons/io5";
-import { IoSettings } from "react-icons/io5";
-
+import { IoLogOut, IoSettings } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 
-export const Dropdown = ({onLogout}) => {
+export const Dropdown = ({ onLogout }) => {
   return (
-    <ul className="absolute bg-white shadow-md rounded-lg mt-2 w-40 text-[#3B82F6]">
-      <li className="py-2 px-2 hover:bg-[#3B82F6] hover:text-white transition-colors duration-300 ease-in-out rounded-md">
-        <NavLink to="/dashboard" className="flex gap-1 items-center">
-          <FaUser size={15}/> Dashboard
+    <ul className="w-48 rounded-xl bg-[#1E293B] border border-white/10 shadow-2xl shadow-black/50 p-1 text-gray-200">
+      <li>
+        <NavLink to="/dashboard" className="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-[#0F172A] transition-colors">
+          <FaUser size={16} className="text-[#3B82F6]" />
+          <span>Dashboard</span>
         </NavLink>
       </li>
-      <li className="py-2 px-2 hover:bg-[#3B82F6] hover:text-white transition-colors duration-300 ease-in-out rounded-md">
-        <NavLink to="/settings" className="flex gap-1 items-center">
-          <IoSettings  size={15}/> Settings
+
+      <li>
+        <NavLink to="/settings" className="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-[#0F172A] transition-colors">
+          <IoSettings size={18} className="text-[#3B82F6]" />
+          <span>Settings</span>
         </NavLink>
       </li>
-      <li className="py-2 px-2 hover:bg-[#3B82F6] hover:text-white transition-colors duration-300 ease-in-out flex gap-1 items-center cursor-pointer rounded-md" onClick={onLogout}>
-        <IoLogOut size={20}/> Logout
+
+      <div className="my-1 h-px bg-white/10" />
+
+      <li>
+        <button
+          onClick={onLogout}
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors">
+          <IoLogOut size={18} />
+          <span>Logout</span>
+        </button>
       </li>
     </ul>
   );
