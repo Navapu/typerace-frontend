@@ -1,17 +1,18 @@
 import { apiClient } from "../services/apiClient.js";
 import { useEffect, useState } from "react";
 import { FaChartLine } from "react-icons/fa6"; 
-import { FaTrophy, FaClipboardList } from "react-icons/fa";
+import { FaTrophy } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
 export const PlayerStatsCard = () => {
   const [error, setError] = useState(null);
-  const [metrics, setMetrics] = useState("");
+  const [metrics, setMetrics] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getPlayerMetrics = async () => {
       try {
         setLoading(true);
+        setError(null);
         const response = await apiClient("/games/me/metrics", {
           method: "GET",
         });

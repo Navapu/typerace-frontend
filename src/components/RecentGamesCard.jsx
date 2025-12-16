@@ -2,18 +2,19 @@ import { apiClient } from "../services/apiClient.js";
 import { useEffect, useState } from "react";
 import { FaTrophy, FaChartLine } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
-
+import { useNavigate } from "react-router";
 export const RecentGamesCard = () => {
   const [error, setError] = useState(null);
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const getGamesHistory = async () => {
       try {
         setLoading(true);
+        setError(null);
         const response = await apiClient(`/games/me/history?page=${currentPage}&limit=3`, {
           method: "GET",
         });
@@ -59,7 +60,7 @@ export const RecentGamesCard = () => {
         {games.length > 0 ? (
           <div className="space-y-6">
             {games.map((game) => (
-              <div key={game._id} className="flex items-center justify-between bg-[#1F2937] p-4 rounded-xl shadow-xl hover:scale-102 transition-transform duration-300 ease-in-out cursor-pointer">
+              <div key={game._id} onClick={() => navigate(`/texts/${game.textId}/stats`)} className="flex items-center justify-between bg-[#1F2937] p-4 rounded-xl shadow-xl hover:scale-102 transition-transform duration-300 ease-in-out cursor-pointer">
                 <div className="flex flex-col">
                   <span className="font-semibold text-gray-200">Mode: {game.mode}</span>
                   <span className="font-semibold text-gray-200">Difficulty: {game.difficulty}</span>

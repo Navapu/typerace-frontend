@@ -7,6 +7,7 @@ import PublicRoute from './components/PublicRoute.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx'
 import { Register } from './pages/Register.jsx';
 import { Dashboard } from './pages/Dashboard.jsx';
+import { TextStatsPage } from './pages/TextStatsPage.jsx';
 function App() {
   return (
     <div>
@@ -35,6 +36,7 @@ function App() {
             <Dashboard />
           </PrivateRoute>
         }/>
+        <Route path="/texts/:textId/stats" element={<TextStatsPage />} />
       </Routes>
     </div>
   )
