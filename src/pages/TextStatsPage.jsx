@@ -4,7 +4,7 @@ import { apiClient } from "../services/apiClient.js";
 import { Bar, Doughnut } from "react-chartjs-2";
 import { FaTrophy, FaChartLine, FaRegFileAlt } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
-
+import "../services/chartSetup.js";
 export const TextStatsPage = () => {
   const { textId } = useParams();
 
@@ -92,10 +92,10 @@ export const TextStatsPage = () => {
         data: [accuracy, 100 - accuracy],
         backgroundColor: [
           "rgba(34, 197, 94, 0.85)",
-          "rgba(239, 68, 68, 0.6)",
+          "rgba(239, 68, 68, 0.9)"
         ],
         borderWidth: 0,
-        cutout: "70%",
+        cutout: "75%",
       },
     ],
   };

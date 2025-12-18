@@ -8,6 +8,7 @@ import PrivateRoute from './components/PrivateRoute.jsx'
 import { Register } from './pages/Register.jsx';
 import { Dashboard } from './pages/Dashboard.jsx';
 import { TextStatsPage } from './pages/TextStatsPage.jsx';
+import { PlayRandomPage } from './pages/PlayRandomPage.jsx';
 function App() {
   return (
     <div>
@@ -37,6 +38,7 @@ function App() {
           </PrivateRoute>
         }/>
         <Route path="/texts/:textId/stats" element={<TextStatsPage />} />
+        <Route path='/play/random' element={<PlayRandomPage />}/>
       </Routes>
     </div>
   )
