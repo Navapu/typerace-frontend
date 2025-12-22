@@ -142,9 +142,9 @@ export const Register = () => {
 
           {/* Error general */}
           {error && (
-            <p className="text-orange-500 text-center mt-2">
-              {error instanceof Error ? error.message : "Error desconocido"}
-            </p>
+            <div className="bg-red-500/20 border border-red-400/30 text-red-300 p-3 rounded-xl text-center">
+              {error.message}
+            </div>
           )}
         </form>
       </div>

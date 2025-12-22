@@ -44,7 +44,7 @@ export const PlayerStatsCard = () => {
 
         {error && (
           <div className="w-full bg-red-500 text-white p-2 rounded-2xl">
-            <p className="text-center">There was an error fetching your metrics.</p>
+            {<p className="text-center">{error}</p>}
           </div>
         )}
 

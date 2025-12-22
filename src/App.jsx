@@ -5,10 +5,12 @@ import { LoginGoogle } from './pages/LoginGoogle.jsx';
 import { Header } from './components/Header.jsx';
 import PublicRoute from './components/PublicRoute.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx'
+import AdminRoute from './components/ProtectedRouteAdmin.jsx'
 import { Register } from './pages/Register.jsx';
 import { Dashboard } from './pages/Dashboard.jsx';
 import { TextStatsPage } from './pages/TextStatsPage.jsx';
 import { PlayRandomPage } from './pages/PlayRandomPage.jsx';
+import { AdminInsertText } from './pages/AdminInsertText.jsx';
 function App() {
   return (
     <div>
@@ -39,6 +41,12 @@ function App() {
         }/>
         <Route path="/texts/:textId/stats" element={<TextStatsPage />} />
         <Route path='/play/random' element={<PlayRandomPage />}/>
+
+        <Route path='/inserttext' element={
+          <AdminRoute>
+            <AdminInsertText />
+          </AdminRoute>
+        }/>
       </Routes>
     </div>
   )
