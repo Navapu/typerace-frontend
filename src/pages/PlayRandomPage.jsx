@@ -20,7 +20,7 @@ export const PlayRandomPage = () => {
   const [finishedAt, setfinishedAt] = useState(null);
   const [gameData, setGameData] = useState({});
   const [, setSearchParams] = useSearchParams();
-
+  const [finishIn, setFinishIn] = useState(0);
   useEffect(() => {
     const getRandomText = async () => {
       try {
@@ -53,12 +53,9 @@ export const PlayRandomPage = () => {
     getRandomText();
   }, [difficulty, language, setSearchParams]);
 
-  useEffect(() => {
-
-  }, [typedText, text]);
-
   useEffect (() => {
     if (!text?.content) return;
+    setFinishIn((typedText.length / text.content.length * 100).toFixed(2));
     if(typedText.length === text.content.length){
       setGameState("finished");
       setfinishedAt(Date.now());
@@ -96,7 +93,7 @@ export const PlayRandomPage = () => {
     const durationSeconds = Math.max((finishedAt - startedAt) / 1000, 1);
     const charactersTyped = typedText.length;
     const charactersWrong = charactersTyped - charactersCorrect;
-    const accuracy = charactersCorrect / charactersTyped * 100
+    const accuracy = charactersCorrect / charactersTyped * 100;
     const rawWPM = (charactersTyped / 5) / (durationSeconds / 60)
     const adjustedWPM = (charactersCorrect / 5) / (durationSeconds / 60)
     return({
@@ -121,8 +118,8 @@ export const PlayRandomPage = () => {
         method: 'POST',
         body: JSON.stringify(result)
       })
-      if (!response.ok) throw new Error("Failed to save game results");
       const res = await response.json();
+      if (!response.ok) throw new Error(res.msg || "Failed to save game results");
       setGameData(res.data)
     }catch(error){
       setError(error.message)
@@ -188,14 +185,35 @@ export const PlayRandomPage = () => {
           Spanish
         </button>
       </div>
-      <div className="mb-4 flex justify-center">
+      <div className="mb-4 flex items-center gap-4 justify-center">
+
+        {/* Cronómetro */}
         <div
-        className={`px-4 py-2 rounded-xl font-mono text-lg tracking-widest
-        bg-[#020617] border border-white/10 text-cyan-300 shadow-inner
-        ${gameState === "playing" ? "animate-pulse" : ""}`}
+          className={`px-4 py-2 rounded-xl font-mono text-lg tracking-widest
+          bg-[#020617] border border-white/10 text-cyan-300 shadow-inner
+          ${gameState === "playing" ? "animate-pulse" : ""}`}
         >
-        ⏱ {seconds}s
+          ⏱ {seconds}s
         </div>
+
+        {/* Progreso */}
+        <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-[#020617] border border-white/10 shadow-inner min-w-[220px]">
+          
+          {/* Barra */}
+          <div className="relative w-full h-3 rounded-full bg-white/10 overflow-hidden">
+            <div
+              className={`absolute left-0 top-0 h-full rounded-full transition-all duration-300
+              ${finishIn >= 100 ? "bg-green-400" : "bg-linear-to-r from-cyan-400 to-blue-500"}`}
+              style={{ width: `${finishIn}%` }}
+            />
+          </div>
+
+          {/* Porcentaje */}
+          <span className="font-mono text-sm text-white/80 w-[52px] text-right">
+            {finishIn}%
+          </span>
+        </div>
+
       </div>
       <div className="w-full max-w-4xl bg-[#1E293B] rounded-2xl p-6 shadow-lg shadow-black/30 border border-white/5">
         {loading && <p className="text-gray-300">Loading...</p>}

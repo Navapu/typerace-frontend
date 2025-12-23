@@ -29,6 +29,7 @@ export const TypingInput = ({
     setTypedText(value);
   };
 
+
   return (
     <input
       ref={inputRef}
