@@ -43,7 +43,7 @@ export const PlayerStatsCard = () => {
         {loading && <div className="text-gray-300 mt-4">Loading...</div>}
 
         {error && (
-          <div className="w-full bg-red-500 text-white p-2 rounded-2xl">
+          <div className="w-full bg-red-500/20 border border-red-400/30 text-red-300 p-2 rounded-2xl">
             {<p className="text-center">{error}</p>}
           </div>
         )}
