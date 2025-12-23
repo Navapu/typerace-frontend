@@ -3,27 +3,40 @@ import { apiClient } from "../services/apiClient.js";
 import { TextDisplay } from "../components/TextDisplay.jsx";
 import { TypingInput } from "../components/TypingInput.jsx";
 import { GameResultCard } from "../components/GameResultCard.jsx";
+import { useSearchParams } from 'react-router-dom';
 export const PlayRandomPage = () => {
+  const param = new URLSearchParams (window.location.search)
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
-  const [difficulty, setDifficulty] = useState("medium");
-  const [language, setLanguage] = useState("en");
+
+  const [difficulty, setDifficulty] = useState(param.get('difficulty') ||'medium');
+  const [language, setLanguage] = useState(param.get('language') ||'en');
+
   const [typedText, setTypedText] = useState("");
   const [gameState, setGameState] = useState("idle");
   const [seconds, setSeconds] = useState(0);
   const [startedAt, setStartedAt] = useState(null);
   const [finishedAt, setfinishedAt] = useState(null);
   const [gameData, setGameData] = useState({});
+  const [, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     const getRandomText = async () => {
       try {
         setLoading(true);
         setError(null);
+        
+        const params = new URLSearchParams();
+        params.append("difficulty", difficulty);
+        params.append("language", language);
+
         const response = await apiClient(
           `/texts/random?difficulty=${difficulty}&language=${language}`,
           { method: "GET" }
         );
+        setSearchParams(params)
+
         const res = await response.json();
         if (!response.ok) throw new Error(res.msg || "Get random text failed");
         setText(res.data);
@@ -38,7 +51,7 @@ export const PlayRandomPage = () => {
     };
 
     getRandomText();
-  }, [difficulty, language]);
+  }, [difficulty, language, setSearchParams]);
 
   useEffect(() => {
 
