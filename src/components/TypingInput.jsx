@@ -6,6 +6,7 @@ export const TypingInput = ({
   setTypedText,
   gameState,
   setGameState,
+  setStartedAt
 }) => {
   const inputRef = useRef(null);
 
@@ -22,6 +23,7 @@ export const TypingInput = ({
 
     if (gameState === "idle" && value.length > 0) {
       setGameState("playing");
+      setStartedAt(Date.now());
     }
 
     setTypedText(value);

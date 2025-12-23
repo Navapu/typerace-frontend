@@ -10,6 +10,9 @@ export const PlayRandomPage = () => {
   const [language, setLanguage] = useState("en");
   const [typedText, setTypedText] = useState("");
   const [gameState, setGameState] = useState("idle");
+  const [seconds, setSeconds] = useState(0);
+  const [startedAt, setStartedAt] = useState(null);
+  const [finishedAt, setfinishedAt] = useState(null);
   useEffect(() => {
     const getRandomText = async () => {
       try {
@@ -24,6 +27,7 @@ export const PlayRandomPage = () => {
         setText(res.data);
         setTypedText("");
         setGameState("idle");
+        setSeconds(0);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -34,6 +38,80 @@ export const PlayRandomPage = () => {
     getRandomText();
   }, [difficulty, language]);
 
+  useEffect(() => {
+
+  }, [typedText, text]);
+
+  useEffect (() => {
+    if (!text?.content) return;
+    if(typedText.length === text.content.length){
+      setGameState("finished");
+      setfinishedAt(Date.now());
+    }
+  }, [typedText, text.content])
+
+  useEffect(() => {
+    if(gameState === "playing"){
+        const intervalId = setInterval(() => {
+          setSeconds(prev => prev + 1);
+        }, 1000);
+
+      return () => clearInterval(intervalId);
+    }
+    const handleFinish = async () => {
+      if (gameState === "finished") {
+        const result = calculateGameResult();
+          try {
+            await sendGameDataToBackend(result);
+            console.log("Game data sent successfully");
+          } catch (error) {
+            console.error(error);
+          }
+      }
+    };
+  handleFinish();
+  }, [gameState])
+
+  const calculateGameResult = () => {
+    let correct = 0;
+    for (let i = 0; i < typedText.length; i++) {
+      if (typedText[i] === text.content[i]) correct++;
+    }
+
+    const charactersCorrect = correct
+    const durationSeconds = Math.max((finishedAt - startedAt) / 1000, 1);
+    const charactersTyped = typedText.length;
+    const charactersWrong = charactersTyped - charactersCorrect;
+    const accuracy = charactersCorrect / charactersTyped * 100
+    const rawWPM = (charactersTyped / 5) / (durationSeconds / 60)
+    const adjustedWPM = (charactersCorrect / 5) / (durationSeconds / 60)
+    return({
+      charactersTyped,
+      charactersCorrect,
+      charactersWrong,
+      accuracy,
+      rawWPM,
+      adjustedWPM,
+      duration: durationSeconds,
+      startedAt,
+      finishedAt,
+      mode: "normal",
+      difficulty,
+      textId: text._id
+    });
+  }
+
+  const sendGameDataToBackend = async(result) => {
+    try{
+      const response = await apiClient('/games/save', {
+        method: 'POST',
+        body: JSON.stringify(result)
+      })
+      if (!response.ok) throw new Error("Failed to save game results");
+    }catch(error){
+      setError(error.message)
+    }
+  }
   return (
     <div className="min-h-screen flex flex-col items-center justify-start p-6 bg-[#0F172A]">
       <div className="flex gap-3 mb-6">
@@ -94,7 +172,15 @@ export const PlayRandomPage = () => {
           Spanish
         </button>
       </div>
-
+      <div className="mb-4 flex justify-center">
+        <div
+        className={`px-4 py-2 rounded-xl font-mono text-lg tracking-widest
+        bg-[#020617] border border-white/10 text-cyan-300 shadow-inner
+        ${gameState === "playing" ? "animate-pulse" : ""}`}
+        >
+        ⏱ {seconds}s
+        </div>
+      </div>
       <div className="w-full max-w-4xl bg-[#1E293B] rounded-2xl p-6 shadow-lg shadow-black/30 border border-white/5">
         {loading && <p className="text-gray-300">Loading...</p>}
         {error && (
@@ -111,6 +197,7 @@ export const PlayRandomPage = () => {
           setTypedText={setTypedText}
           gameState={gameState}
           setGameState={setGameState}
+          setStartedAt = {setStartedAt}
           />
       </div>      
     </div>

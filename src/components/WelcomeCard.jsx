@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
+import { useNavigate } from "react-router";
 export const WelcomeCard = () => {
     const {user} = useContext(AuthContext);
-
+    const navigate = useNavigate();
   return (
     <div className="relative overflow-hidden rounded-2xl bg-[#1E293B] p-6 shadow-lg shadow-black/30 border border-white/5 m-3">
       
@@ -17,7 +18,7 @@ export const WelcomeCard = () => {
             <span className="text-[#3B82F6]">{user?.username ?? "Player"}</span> 👋
           </h2>
 
-          <button className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#3B82F6] px-5 py-2.5 text-white font-semibold hover:bg-[#60A5FA] transition shadow-md shadow-blue-500/20 cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
+          <button onClick={() => navigate('/play/random')} className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#3B82F6] px-5 py-2.5 text-white font-semibold hover:bg-[#60A5FA] transition shadow-md shadow-blue-500/20 cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
             Start a Race
             <span className="text-lg">⚡</span>
           </button>

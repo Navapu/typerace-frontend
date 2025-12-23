@@ -10,12 +10,15 @@ export const TextDisplay = ({textContent, typedText, gameState}) => {
             if (typedLetter != null) {
                  colorClass = typedLetter === letter ? "text-green-300" : "text-red-400";
             }
-
+            let colorSpace;
+            if(letter === " " && typedLetter != null){
+              colorSpace = typedLetter === letter ? "border-b-1 pb-1" : "border-b-1 pb-1";
+            }
             const isCursor = showCursor && index === typedText.length;
           return (
             <span
               key={index}
-              className={`relative transition-colors duration-150 ${colorClass} ${
+              className={`relative transition-colors duration-150 ${colorClass} ${colorSpace} ${
                 isCursor? "text-white border-b-2 border-blue-400 animate-pulse": ""}`}>
               {letter}
             </span>
