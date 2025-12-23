@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { apiClient } from "../services/apiClient.js";
 import { TextDisplay } from "../components/TextDisplay.jsx";
 import { TypingInput } from "../components/TypingInput.jsx";
+import { GameResultCard } from "../components/GameResultCard.jsx";
 export const PlayRandomPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -13,6 +14,7 @@ export const PlayRandomPage = () => {
   const [seconds, setSeconds] = useState(0);
   const [startedAt, setStartedAt] = useState(null);
   const [finishedAt, setfinishedAt] = useState(null);
+  const [gameData, setGameData] = useState({});
   useEffect(() => {
     const getRandomText = async () => {
       try {
@@ -63,7 +65,6 @@ export const PlayRandomPage = () => {
         const result = calculateGameResult();
           try {
             await sendGameDataToBackend(result);
-            console.log("Game data sent successfully");
           } catch (error) {
             console.error(error);
           }
@@ -108,6 +109,8 @@ export const PlayRandomPage = () => {
         body: JSON.stringify(result)
       })
       if (!response.ok) throw new Error("Failed to save game results");
+      const res = await response.json();
+      setGameData(res.data)
     }catch(error){
       setError(error.message)
     }
@@ -199,6 +202,17 @@ export const PlayRandomPage = () => {
           setGameState={setGameState}
           setStartedAt = {setStartedAt}
           />
+        {gameState === "finished" && gameData && gameData.duration && (
+          <GameResultCard 
+            gameData={gameData} 
+            onClose={() => {
+              setGameState("idle");
+              setTypedText("");
+              setGameData({});
+              setSeconds(0);
+            }}
+          />
+        )}
       </div>      
     </div>
   );
