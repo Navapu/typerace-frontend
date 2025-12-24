@@ -22,7 +22,6 @@ async function refreshAccessToken() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ refreshToken }),
       });
-
       if (!res.ok) throw new Error("Failed to refresh token");
 
       const data = await res.json();

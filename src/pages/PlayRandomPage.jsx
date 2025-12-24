@@ -127,64 +127,66 @@ export const PlayRandomPage = () => {
   }
   return (
     <div className="min-h-screen flex flex-col items-center justify-start p-6 bg-[#0F172A]">
-      <div className="flex gap-3 mb-6">
-        <button
-          onClick={() => setDifficulty("easy")}
-          className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg ${
-            difficulty === "easy"
-              ? "bg-blue-500 border-2 border-white/20"
-              : "bg-[#1E293B] hover:bg-blue-500"
-          } text-white`}
-        >
-          Easy
-        </button>
+      <div className="flex flex-wrap gap-5 mb-6 bg-[#1e293b71] shadow-md rounded-4xl py-2 px-10 justify-center">
+        <div className="flex flex-wrap gap-3 justify-center">
+          <button
+            onClick={() => setDifficulty("easy")}
+            className={`px-7 py-2 rounded-4xl font-semibold transition-all duration-200 shadow-lg ${
+              difficulty === "easy"
+                ? "bg-blue-500 border-2 border-white/20"
+                : "bg-[#1E293B] hover:bg-blue-500 transition-colors duration-500"
+            } text-white`}
+          >
+            Easy
+          </button>
 
-        <button
-          onClick={() => setDifficulty("medium")}
-          className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg ${
-            difficulty === "medium"
-              ? "bg-blue-500 border-2 border-white/20"
-              : "bg-[#1E293B] hover:bg-blue-500"
-          } text-white`}
-        >
-          Medium
-        </button>
+          <button
+            onClick={() => setDifficulty("medium")}
+            className={`px-7 py-2 rounded-4xl font-semibold transition-all duration-200 shadow-lg ${
+              difficulty === "medium"
+                ? "bg-blue-500 border-2 border-white/20"
+                : "bg-[#1E293B] hover:bg-blue-500 transition-colors duration-500"
+            } text-white`}
+          >
+            Medium
+          </button>
 
-        <button
-          onClick={() => setDifficulty("hard")}
-          className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg ${
-            difficulty === "hard"
-              ? "bg-blue-500 border-2 border-white/20"
-              : "bg-[#1E293B] hover:bg-blue-500"
-          } text-white`}
-        >
-          Hard
-        </button>
+          <button
+            onClick={() => setDifficulty("hard")}
+            className={`px-7 py-2 rounded-4xl font-semibold transition-all duration-200 shadow-lg ${
+              difficulty === "hard"
+                ? "bg-blue-500 border-2 border-white/20"
+                : "bg-[#1E293B] hover:bg-blue-500 transition-colors duration-500"
+            } text-white`}
+          >
+            Hard
+          </button>  
+        </div>
+          <div className="flex flex-wrap gap-3 justify-center">
+          <button
+            onClick={() => setLanguage("en")}
+            className={`px-7 py-2 rounded-4xl font-semibold transition-all duration-200 shadow-lg ${
+              language === "en"
+                ? "bg-orange-400 border-2 border-white/20"
+                : "bg-[#1E293B] hover:bg-orange-400 transition-colors duration-500"
+            } text-white`}
+          >
+            English
+          </button>
+          <button
+            onClick={() => setLanguage("es")}
+            className={`px-7 py-2 rounded-4xl font-semibold transition-all duration-200 shadow-lg ${
+              language === "es"
+                ? "bg-orange-400 border-2 border-white/20"
+                : "bg-[#1E293B] hover:bg-orange-400 transition-colors duration-500"
+            } text-white`}
+          >
+            Spanish
+          </button>
+        </div>
       </div>
 
-      <div className="flex gap-3 mb-6">
-        <button
-          onClick={() => setLanguage("en")}
-          className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg ${
-            language === "en"
-              ? "bg-cyan-500 border-2 border-white/20"
-              : "bg-[#1E293B] hover:bg-cyan-500"
-          } text-white`}
-        >
-          English
-        </button>
 
-        <button
-          onClick={() => setLanguage("es")}
-          className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg ${
-            language === "es"
-              ? "bg-cyan-500 border-2 border-white/20"
-              : "bg-[#1E293B] hover:bg-cyan-500"
-          } text-white`}
-        >
-          Spanish
-        </button>
-      </div>
       <div className="mb-4 flex items-center gap-4 justify-center">
 
         {/* Cronómetro */}

@@ -7,7 +7,7 @@ import { useState } from "react";
 const insertTextSchema = z.object({
   content: z
     .string()
-    .min(250, "The text must be at least 250 characters long"),
+    .min(170, "The text must be at least 170 characters long"),
 
   difficulty: z.enum(["easy", "medium", "hard"], {
     errorMap: () => ({
